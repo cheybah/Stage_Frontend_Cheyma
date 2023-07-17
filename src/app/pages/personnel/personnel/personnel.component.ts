@@ -126,10 +126,12 @@ export class DialogPersonnel {
 
   submit() {
     const randomPassword = Math.random().toString(36).slice(-8);
-    const randomId = Math.floor(Math.random() * 1000); // Generate a random id
+    //const randomId = Math.floor(Math.random() * 1000); // Generate a random id
+
+    
+    //@ts-ignore
 
     this.data.user = {
-      id: randomId,
       login: `${this.data.prenom}.${this.data.nom}`,
       password: randomPassword,
       userRole: 'ROLE_PERSONNEL'
