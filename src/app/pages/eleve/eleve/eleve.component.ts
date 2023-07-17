@@ -1,7 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {EleveService} from 'app/services/eleve.service';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {EleveModel, User} from 'app/models/eleveModel';
+import {EleveModel} from 'app/models/eleveModel';
+import { User } from 'app/models/userModel';
+
 
 @Component({
   selector: 'app-eleve',

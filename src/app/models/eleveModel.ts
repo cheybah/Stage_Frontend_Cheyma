@@ -1,3 +1,5 @@
+import { User } from './userModel';
+
 export interface EleveModel {
     id: number;
     nom: string;
@@ -11,12 +13,4 @@ export interface EleveModel {
     etat: string;
     numTels: string[];
     user: User;
-}
-
-export interface User {
-    id: number;
-    login: string;
-    password: string;
-    userRole: string;
-    // Define the properties of the User entity here
 }

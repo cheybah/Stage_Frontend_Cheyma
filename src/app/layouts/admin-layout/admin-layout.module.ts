@@ -19,6 +19,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 
 import { EleveComponent, DialogEleve, EditDialogEleve } from 'app/pages/eleve/eleve/eleve.component';
 import { DialogPersonnel, EditDialogPersonnel, PersonnelComponent } from 'app/pages/personnel/personnel/personnel.component';
+import { DialogStation, EditDialogStation, StationComponent } from 'app/pages/station/station/station.component';
+
 
 @NgModule({
   imports: [
@@ -47,6 +49,9 @@ import { DialogPersonnel, EditDialogPersonnel, PersonnelComponent } from 'app/pa
     EditDialogEleve,
     DialogPersonnel,
     EditDialogPersonnel,
+    StationComponent,
+    DialogStation,
+    EditDialogStation,
   ],
 })
 export class AdminLayoutModule {}

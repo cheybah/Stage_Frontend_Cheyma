@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {environment} from '../../environments/environment';
-import {User} from '../models/personnelModel';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environments/environment';
+import { User } from '../models/userModel';
 
 @Injectable({
   providedIn: 'root'
@@ -12,13 +12,13 @@ export class PersonnelService {
 
   getAllPersonnels() {
     const headers = new HttpHeaders()
-        .set('Content-Type', 'application/json');
+      .set('Content-Type', 'application/json');
     return this.http.get(environment.url + '/personnels', { headers });
   }
 
   getAllPersonnelEtatActif() {
     const headers = new HttpHeaders()
-        .set('Content-Type', 'application/json');
+      .set('Content-Type', 'application/json');
     return this.http.get(environment.url + '/personnels/activer', { headers });
   }
 
@@ -32,19 +32,19 @@ export class PersonnelService {
     user: User;
   }) {
     const headers = new HttpHeaders()
-        .set('Content-Type', 'application/json');
+      .set('Content-Type', 'application/json');
     return this.http.post(environment.url + '/personnels', perso, { headers });
   }
 
   archiverPersonnel(id) {
     const headers = new HttpHeaders()
-        .set('Content-Type', 'application/json');
-    return this.http.put(environment.url + '/personnels/' + id + '/archiver', { headers })
+      .set('Content-Type', 'application/json');
+    return this.http.put(environment.url + '/personnels/' + id + '/archiver', {}, { headers });
   }
 
-  updatePersonnel(id, personnel) {
+  updatePersonnel(id, perso) {
     const headers = new HttpHeaders()
-        .set('Content-Type', 'application/json');
-    return this.http.put(environment.url + '/personnels/' + id, personnel , { headers })
+      .set('Content-Type', 'application/json');
+    return this.http.put(environment.url + '/personnels/' + id, perso, { headers });
   }
 }

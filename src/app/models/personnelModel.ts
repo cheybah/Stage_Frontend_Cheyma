@@ -1,3 +1,5 @@
+import { User } from './userModel';
+
 export interface PersonnelModel {
     id: number;
     nom: string;
@@ -7,12 +9,4 @@ export interface PersonnelModel {
     etat: string;
     num: string[];
     user: User;
-}
-
-export interface User {
-    id: number;
-    login: string;
-    password: string;
-    userRole: string;
-    // Define the properties of the User entity here
 }

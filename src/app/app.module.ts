@@ -13,6 +13,7 @@ import { HomeComponent } from './home/home.component';
 import { TemplateComponent } from './template/template.component'; 
 import { BrowserModule } from '@angular/platform-browser';
 import { TokenInterceptor } from './tokeninterceptor';
+import { StationComponent } from './pages/station/station/station.component';
 
 @NgModule({
   imports: [
@@ -47,6 +48,7 @@ import { TokenInterceptor } from './tokeninterceptor';
     LoginComponent,
     HomeComponent,
     TemplateComponent,
+    StationComponent,
 
 
   ],

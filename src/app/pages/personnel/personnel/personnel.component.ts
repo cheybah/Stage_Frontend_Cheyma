@@ -1,7 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { PersonnelService } from 'app/services/personnel.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { PersonnelModel, User} from 'app/models/personnelModel';
+import { PersonnelModel} from 'app/models/personnelModel';
+import { User } from 'app/models/userModel';
 
 @Component({
   selector: 'app-personnel',
@@ -42,15 +43,15 @@ export class PersonnelComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAllPersonnels();
+    this.getAllPersonnelsActive();
     console.log(this.dataSource);
   }
 
   refresh() {
-    this.getAllPersonnels();
+    this.getAllPersonnelsActive();
   }
 
-  private getAllPersonnels() {
+  private getAllPersonnelsActive() {
     this.personnelService.getAllPersonnelEtatActif().subscribe(
       (res: any) => {
         console.log(res);
@@ -136,7 +137,7 @@ export class DialogPersonnel {
 
     this.data.etat = 'activer';
 
-    const personnel = {
+    const perso = {
       nom: this.data.nom,
       prenom: this.data.prenom,
       email: this.data.email,
@@ -146,7 +147,7 @@ export class DialogPersonnel {
       user: this.data.user,
     };
 
-    this.personnelService.addPersonnel(personnel).subscribe((res: any) => {
+    this.personnelService.addPersonnel(perso).subscribe((res: any) => {
       this.dialogRef.close();
     });
   }
@@ -177,7 +178,8 @@ export class EditDialogPersonnel {
     private personnelService: PersonnelService) { }
 
   submitEdit() {
-    const personnel = {
+    const id = this.data.id;
+    const perso = {
       id: this.data.id,
       nom: this.data.nom,
       prenom: this.data.prenom,
@@ -188,7 +190,11 @@ export class EditDialogPersonnel {
       user: this.data.user
     };
 
-    this.personnelService.updatePersonnel(this.data.id, personnel).subscribe((res: any) => {
+    console.log(id);
+    console.log(perso);
+
+
+    this.personnelService.updatePersonnel(this.data.id, perso).subscribe((res: any) => {
       this.dialogRef.close();
     });
   }
