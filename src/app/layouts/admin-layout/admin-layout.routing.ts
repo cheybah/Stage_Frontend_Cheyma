@@ -8,50 +8,11 @@ import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { EleveComponent } from 'app/pages/eleve/eleve/eleve.component';
 import { PersonnelComponent } from 'app/pages/personnel/personnel/personnel.component';
+import {StationComponent} from 'app/pages/station/station/station.component';
+
 
 export const AdminLayoutRoutes: Routes = [
-    // {
-    //   path: '',
-    //   children: [ {
-    //     path: 'dashboard',
-    //     component: DashboardComponent
-    // }]}, {
-    // path: '',
-    // children: [ {
-    //   path: 'userprofile',
-    //   component: UserProfileComponent
-    // }]
-    // }, {
-    //   path: '',
-    //   children: [ {
-    //     path: 'icons',
-    //     component: IconsComponent
-    //     }]
-    // }, {
-    //     path: '',
-    //     children: [ {
-    //         path: 'notifications',
-    //         component: NotificationsComponent
-    //     }]
-    // }, {
-    //     path: '',
-    //     children: [ {
-    //         path: 'maps',
-    //         component: MapsComponent
-    //     }]
-    // }, {
-    //     path: '',
-    //     children: [ {
-    //         path: 'typography',
-    //         component: TypographyComponent
-    //     }]
-    // }, {
-    //     path: '',
-    //     children: [ {
-    //         path: 'upgrade',
-    //         component: UpgradeComponent
-    //     }]
-    // }
+
     { path: 'dashboard',      component: DashboardComponent },
     { path: 'user-profile',   component: UserProfileComponent },
     { path: 'table-list',     component: TableListComponent },
@@ -60,5 +21,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'notifications',  component: NotificationsComponent },
     { path: 'eleves',  component: EleveComponent },
     { path: 'personnels',  component: PersonnelComponent },
+    { path: 'stations',  component: StationComponent },
 
 ];
