@@ -2,7 +2,6 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { Station } from 'app/models/stationModel';
 import { StationService } from 'app/services/station.service';
-import {Classe} from 'app/models/classeModel';
 
 @Component({
   selector: 'app-station',

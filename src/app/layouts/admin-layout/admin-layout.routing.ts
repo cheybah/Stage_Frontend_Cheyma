@@ -9,6 +9,8 @@ import { NotificationsComponent } from '../../notifications/notifications.compon
 import { EleveComponent } from 'app/pages/eleve/eleve/eleve.component';
 import { PersonnelComponent } from 'app/pages/personnel/personnel/personnel.component';
 import {StationComponent} from 'app/pages/station/station/station.component';
+import {ClasseComponent} from 'app/pages/classe/classe/classe.component';
+
 
 
 export const AdminLayoutRoutes: Routes = [
@@ -22,5 +24,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'eleves',  component: EleveComponent },
     { path: 'personnels',  component: PersonnelComponent },
     { path: 'stations',  component: StationComponent },
+    { path: 'classes',  component: ClasseComponent },
+
 
 ];
