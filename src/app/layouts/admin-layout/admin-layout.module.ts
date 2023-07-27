@@ -28,6 +28,8 @@ import {ConfirmDialogComponent} from 'app/pages/popup/popup.component';
 import { ChauffeurComponent, DialogChauffeur, EditDialogChauffeur } from 'app/pages/chauffeur/chauffeur/chauffeur.component';
 import { AgenceComponent, DialogAgence, EditDialogAgence } from 'app/pages/agence/agence.component';
 import { BusComponent, DialogBus, EditDialogBus } from 'app/pages/bus/bus.component';
+import { AnneeScolaireComponent, DialogAnneeScolaire, EditDialogAnneeScolaire } from 'app/pages/annee-scolaire/annee-scolaire.component';
+
 
 
 
@@ -75,6 +77,9 @@ import { BusComponent, DialogBus, EditDialogBus } from 'app/pages/bus/bus.compon
     BusComponent,
     DialogBus,
     EditDialogBus,
+    AnneeScolaireComponent,
+    DialogAnneeScolaire,
+    EditDialogAnneeScolaire,
 
   ],
 })

@@ -13,6 +13,7 @@ import {ClasseComponent} from 'app/pages/classe/classe/classe.component';
 import { ChauffeurComponent } from 'app/pages/chauffeur/chauffeur/chauffeur.component';
 import { AgenceComponent } from 'app/pages/agence/agence.component';
 import { BusComponent } from '../../pages/bus/bus.component';
+import {AnneeScolaireComponent} from '../../pages/annee-scolaire/annee-scolaire.component';
 
 
 
@@ -31,6 +32,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'agences',  component: AgenceComponent },
     { path: 'chauffeurs',  component: ChauffeurComponent },
     { path: 'bus',  component: BusComponent },
+    { path: 'annee-scolaire',   component: AnneeScolaireComponent },
 
 
 ];
