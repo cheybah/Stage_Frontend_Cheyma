@@ -154,14 +154,14 @@ export class DialogChauffeur implements OnInit {
       return;
     }
 
-    //this.data.etat = 'activer';
+
 
     const chauff = {
       nom: this.data.nom,
       prenom: this.data.prenom,
       email: this.data.email,
       numTels: this.data.numTels,
-      etat: 'activer',
+      etat: 'activer'
     };
 
     this.chauffeurService.addChauffeur(chauff).subscribe((res: any) => {
