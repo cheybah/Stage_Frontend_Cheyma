@@ -17,10 +17,17 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
 
+
+
+
 import { EleveComponent, DialogEleve, EditDialogEleve } from 'app/pages/eleve/eleve/eleve.component';
 import { DialogPersonnel, EditDialogPersonnel, PersonnelComponent } from 'app/pages/personnel/personnel/personnel.component';
 import { DialogStation, EditDialogStation, StationComponent } from 'app/pages/station/station/station.component';
 import {ClasseComponent, DialogClasse, EditDialogClasse} from 'app/pages/classe/classe/classe.component';
+import {ConfirmDialogComponent} from 'app/pages/popup/popup.component';
+import { ChauffeurComponent, DialogChauffeur, EditDialogChauffeur } from 'app/pages/chauffeur/chauffeur/chauffeur.component';
+import { AgenceComponent, DialogAgence, EditDialogAgence } from 'app/pages/agence/agence.component';
+
 
 
 
@@ -57,6 +64,14 @@ import {ClasseComponent, DialogClasse, EditDialogClasse} from 'app/pages/classe/
     ClasseComponent,
     DialogClasse,
     EditDialogClasse,
+    ConfirmDialogComponent,
+    AgenceComponent,
+    DialogAgence,
+    EditDialogAgence,
+    ChauffeurComponent,
+    DialogChauffeur,
+    EditDialogChauffeur,
+
   ],
 })
 export class AdminLayoutModule {}

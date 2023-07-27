@@ -1,8 +1,12 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { PersonnelService } from 'app/services/personnel.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PersonnelModel} from 'app/models/personnelModel';
 import { User } from 'app/models/userModel';
+import { ConfirmDialogComponent } from 'app/pages/popup/popup.component';
+
+
 
 @Component({
   selector: 'app-personnel',
@@ -17,7 +21,9 @@ export class PersonnelComponent implements OnInit {
   searchText = '';
 
   constructor(private personnelService: PersonnelService,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,
+    private fb: FormBuilder) { }
+
 
   onSearchChange() {
     // Reset the filteredData array
@@ -41,6 +47,9 @@ export class PersonnelComponent implements OnInit {
       );
     });
   }
+  
+
+
 
   ngOnInit(): void {
     this.getAllPersonnelsActive();
@@ -64,11 +73,32 @@ export class PersonnelComponent implements OnInit {
     );
   }
 
-  archiverPersonnel(id) {
-    this.personnelService.archiverPersonnel(id).subscribe((res: any) => {
-      this.refresh();
-    });
-  }
+    // Method to delete personnel
+    archiverPersonnel(id: number): void {
+      // Open the confirmation dialog before deleting personnel
+      const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+        width: '300px',
+        data: {
+          title: 'Confirmer la suppression',
+          message: 'Êtes-vous sûr de vouloir supprimer ce personnel ?',
+          confirmText: 'Supprimer',
+          confirmColor: 'warn'
+        }
+        
+      });
+  
+      dialogRef.afterClosed().subscribe((result: boolean) => {
+        if (result) {
+          // Si l'utilisateur confirme la suppression, appelle le service pour supprimer le produit
+          this.personnelService.archiverPersonnel(id).subscribe((res: any) => {
+            // Handle success or show notification
+            this.refresh();
+          });
+        }
+      });
+  
+    }
+
 
   openDialog() {
     const dialogRef = this.dialog.open(DialogPersonnel, {
@@ -90,7 +120,16 @@ export class PersonnelComponent implements OnInit {
     });
   }
 
-  openEditDialog(id: number, nom: string, prenom: string, email: string, fonction: string, etat: string, num: string[], user: User): void {
+  openEditDialog(
+    id: number,
+    nom: string,
+    prenom: string,
+    email: string,
+    fonction: string,
+    etat: string,
+    num: string[],
+    user: User
+  ): void {
     const dialogRef = this.dialog.open(EditDialogPersonnel, {
       width: '500px',
       data: {
@@ -101,34 +140,59 @@ export class PersonnelComponent implements OnInit {
         fonction: fonction,
         etat: etat,
         num: num,
-        user: user
-      }
+        user: user,
+      },
     });
-
-    dialogRef.afterClosed().subscribe(result => {
-      this.refresh();
-    });
+  
+    // S'abonne à l'événement après la fermeture du dialogue
+    dialogRef.afterClosed().subscribe((result: PersonnelModel) => {
+      // Vérifie si un résultat a été retourné depuis le dialogue
+      if (result) {
+        // Appelle le service pour mettre à jour le personnel
+        this.personnelService.updatePersonnel(result.id, result).subscribe(
+          (res: any) => {
+            // Handle success or show notification
+            dialogRef.close();
+            this.refresh();
+          });
+        }
+      });
+    }
   }
-}
 
 @Component({
   selector: 'dialog-personnel',
   templateUrl: 'dialog-personnel.html',
 })
-export class DialogPersonnel {
+export class DialogPersonnel implements OnInit {
 
   newNum: any;
+  personnelForm: FormGroup;
 
   constructor(
     public dialogRef: MatDialogRef<DialogPersonnel>,
     @Inject(MAT_DIALOG_DATA) public data: PersonnelModel,
+    private formBuilder: FormBuilder,
     private personnelService: PersonnelService) { }
 
-  submit() {
-    const randomPassword = Math.random().toString(36).slice(-8);
-    //const randomId = Math.floor(Math.random() * 1000); // Generate a random id
+    ngOnInit(): void {
 
-    
+      // Create the form group with custom validation for required fields
+      this.personnelForm = this.formBuilder.group({
+        nom: [this.data.nom, Validators.required],
+        prenom: [this.data.prenom, Validators.required],
+        email: [this.data.email],
+        fonction: [this.data.fonction]
+      });
+    }
+
+  submit() {
+    if (this.personnelForm.invalid) {
+      // If the form is invalid (some required fields are empty), do not submit
+      return;
+    }
+    const randomPassword = Math.random().toString(36).slice(-8);
+    //const randomId = Math.floor(Math.random() * 1000); // Generate a random id 
     //@ts-ignore
 
     this.data.user = {
@@ -154,6 +218,11 @@ export class DialogPersonnel {
     });
   }
 
+  onCancel(): void {
+    // Close the dialog without any action
+    this.dialogRef.close();
+  }
+
   removeNum(index: number) {
     this.data.num.splice(index, 1);
   }
@@ -170,36 +239,70 @@ export class DialogPersonnel {
   selector: 'edit-dialog-personnel',
   templateUrl: 'edit-dialog-personnel.html',
 })
-export class EditDialogPersonnel {
+export class EditDialogPersonnel implements OnInit{
 
   newNum: any;
+  personnelForm: FormGroup;
+
 
   constructor(
     public dialogRef: MatDialogRef<EditDialogPersonnel>,
+    public dialog: MatDialog,
+    private formBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: PersonnelModel,
     private personnelService: PersonnelService) { }
 
-  submitEdit() {
-    const id = this.data.id;
-    const perso = {
-      id: this.data.id,
-      nom: this.data.nom,
-      prenom: this.data.prenom,
-      email: this.data.email,
-      fonction: this.data.fonction,
-      etat: this.data.etat,
-      num: this.data.num,
-      user: this.data.user
-    };
+    ngOnInit(): void {
 
-    console.log(id);
-    console.log(perso);
+      // Create the form group with custom validation for required fields
+      this.personnelForm = this.formBuilder.group({
+        nom: [this.data.nom, Validators.required],
+        prenom: [this.data.prenom, Validators.required],
+        email: [this.data.email],
+        fonction: [this.data.fonction]
+      });
+    }
 
 
-    this.personnelService.updatePersonnel(this.data.id, perso).subscribe((res: any) => {
+    submitEdit() {
+
+      // Ouvrir un dialogue de confirmation avant de soumettre les modifications
+      const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+        width: '300px',
+        data: {
+          title: 'Confirmer la modification',
+          message: 'Êtes-vous sûr de vouloir modifier cet personnel ?',
+          confirmText: 'Confirmer',
+          confirmColor: 'primary',
+        },
+      });
+
+    
+      // S'abonner à l'événement après la fermeture du dialogue de confirmation
+      dialogRef.afterClosed().subscribe((result: boolean) => {
+        if (result) {
+          // Si l'utilisateur confirme la modification, soumettre les modifications
+          const id = this.data.id;
+          const personnel: PersonnelModel = {
+            id: this.data.id,
+            nom: this.data.nom,
+            prenom: this.data.prenom,
+            email: this.data.email,
+            fonction: this.data.fonction,
+            etat: this.data.etat,
+            num: this.data.num,
+            user: this.data.user,
+          };
+          this.dialogRef.close(personnel);
+        }
+      });
+    }
+
+    onCancel(): void {
+      // Close the dialog without any action
       this.dialogRef.close();
-    });
-  }
+    }
+    
 
   removeNum(index: number) {
     this.data.num.splice(index, 1);
@@ -211,4 +314,5 @@ export class EditDialogPersonnel {
       this.newNum = '';
     }
   }
+  
 }
