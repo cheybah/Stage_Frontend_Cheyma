@@ -27,6 +27,7 @@ import {ClasseComponent, DialogClasse, EditDialogClasse} from 'app/pages/classe/
 import {ConfirmDialogComponent} from 'app/pages/popup/popup.component';
 import { ChauffeurComponent, DialogChauffeur, EditDialogChauffeur } from 'app/pages/chauffeur/chauffeur/chauffeur.component';
 import { AgenceComponent, DialogAgence, EditDialogAgence } from 'app/pages/agence/agence.component';
+import { BusComponent, DialogBus, EditDialogBus } from 'app/pages/bus/bus.component';
 
 
 
@@ -71,6 +72,9 @@ import { AgenceComponent, DialogAgence, EditDialogAgence } from 'app/pages/agenc
     ChauffeurComponent,
     DialogChauffeur,
     EditDialogChauffeur,
+    BusComponent,
+    DialogBus,
+    EditDialogBus,
 
   ],
 })

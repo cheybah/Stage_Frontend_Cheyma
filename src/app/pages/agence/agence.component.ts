@@ -83,9 +83,6 @@ export class AgenceComponent implements OnInit {
     });
   }
 
-
-
-
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogAgence, {
       width: '500px',
@@ -174,8 +171,6 @@ export class DialogAgence implements OnInit {
     if (this.agenceForm.invalid) {
       return;
     }
-
-    //this.data.etat = 'activer';
 
     const ag = {
       nom: this.data.nom,

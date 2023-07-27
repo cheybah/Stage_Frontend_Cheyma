@@ -15,6 +15,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { TokenInterceptor } from './tokeninterceptor';
 
 
+
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -48,6 +49,7 @@ import { TokenInterceptor } from './tokeninterceptor';
     LoginComponent,
     HomeComponent,
     TemplateComponent,
+
 
 
 
