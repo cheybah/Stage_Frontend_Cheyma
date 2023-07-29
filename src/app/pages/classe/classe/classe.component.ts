@@ -17,6 +17,10 @@ export class ClasseComponent implements OnInit {
   private dataSource: any;
   searchText = '';
 
+  
+  constructor(private classeService: ClasseService,
+    public dialog: MatDialog) { }
+
 
   onSearchChange() {
     // Reset the filteredData array
@@ -36,8 +40,6 @@ export class ClasseComponent implements OnInit {
     });
   }
 
-  constructor(private classeService: ClasseService,
-              public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getAllClassesActive();
@@ -230,7 +232,7 @@ export class EditDialogClasse implements OnInit {
     this.anneeScolaireService.getAllStationEtatActif().subscribe(
         (an) => {
           // @ts-ignore
-          this.anneeScolaires = an.filter(annee => annee.id !== this.data.anneeScolaire.id);
+          this.anneeScolaires = an;
         },
         (error) => {
           console.error(error);
