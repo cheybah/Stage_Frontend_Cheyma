@@ -37,6 +37,11 @@ export class ClasseService {
     return this.http.put<Classe>(environment.url + '/classes/' + id, classe, { headers });
   }
 
+  getAllClasseEtatActiverByAnsId(id: number) {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.get(environment.url + '/classes/activer/' + id, { headers });
+  }
+
   deleteClasse(id: number) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.delete(environment.url + '/classes/' + id, { headers });

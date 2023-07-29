@@ -13,6 +13,7 @@ import { HomeComponent } from './home/home.component';
 import { TemplateComponent } from './template/template.component'; 
 import { BrowserModule } from '@angular/platform-browser';
 import { TokenInterceptor } from './tokeninterceptor';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 
@@ -34,6 +35,7 @@ import { TokenInterceptor } from './tokeninterceptor';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatSnackBarModule,
     RouterModule.forRoot([
       {path:'register',component:UserComponent},
       {path:'login',component:LoginComponent},
