@@ -132,50 +132,19 @@ body, html {
   flex-wrap: wrap; /* Allow the cards to wrap to the next line if the container is narrow */
 }
 
-/* dashboard.component.css */
-
-/* ... (existing code) ... */
-
-/* Add styles for the legend and paragraph container */
-.legend-paragraph-container {
-  margin-top: 20px;
+.chart-container {
+  margin-top: 40px; /* Adjust the margin-top to add some space between the cards and the graph */
+  position: absolute; /* Set the position to absolute to place it under the cards */
+  left: 0;
+  bottom: 0; /* Adjust the bottom value if needed to position the chart */
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.7);
+  
 }
 
-/* Style for the legend list */
-.legend-list {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
-
-/* Style for legend items (with colored squares) */
-.legend-list li {
-  display: flex;
-  align-items: center;
-}
-
-/* Add colored squares for legend items */
-.legend-color {
-  width: 20px;
-  height: 20px;
-  display: inline-block;
-  border-radius: 50%;
-  margin-right: 8px;
-}
-
-.active-eleves-color {
-  background-color: #007bff; /* Replace with the color for active eleves */
-}
-
-.total-eleves-color {
-  background-color: #28a745; /* Replace with the color for total eleves */
-}
-
-/* Style for the paragraph */
-.graph-paragraph {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 14px;
-  color: #333; /* Replace with the desired text color */
+.stat-image {
+  width: 30px; /* Set the width of the image */
+  height: 30px; /* Set the height of the image */
+  object-fit: cover; /* Ensure the image covers the entire container */
+  margin-bottom: 10px; /* Add some space below the image */
 }

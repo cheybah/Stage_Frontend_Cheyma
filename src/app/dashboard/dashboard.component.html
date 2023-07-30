@@ -6,6 +6,7 @@
   </div>
 
   <div class="stat-card">
+    <img src="\assets\img\etudiants.png" alt="Total d'étudiants" class="stat-image" />  
     <h2>Total d'élèves</h2>
     <div class="stat-data">
       <div class="stat-item">
@@ -16,6 +17,7 @@
   </div>
 
   <div class="stat-card">
+    <img src="\assets\img\personnels.png" alt="Total de personnels" class="stat-image" />  
     <h2>Total de personnels</h2>
     <div class="stat-data">
       <div class="stat-item">
@@ -26,6 +28,7 @@
   </div>
 
   <div class="stat-card">
+    <img src="\assets\img\bus.png" alt="Total de bus" class="stat-image" />  
     <h2>Nombre de Bus</h2>
     <div class="stat-data">
       <div class="stat-item">
@@ -37,6 +40,7 @@
 
   <!-- Total Number of Seats Card -->
   <div class="stat-card" (click)="toggleSeatsPanel()"> <!-- Add click event to toggleSeatsPanel() -->
+    <img src="\assets\img\places.png" alt="Total de places" class="stat-image" />  
     <h2>Total de places</h2>
     <div class="stat-data">
       <div class="stat-item">
@@ -62,6 +66,11 @@
       </div>
     </div>
   </div>
+  <div class="chart-container">
+    <canvas baseChart [datasets]="mainChart.data.datasets" [labels]="mainChart.data.labels"
+      [options]="mainChart.options" [legend]="mainChart.legend" [chartType]="mainChart.type">
+    </canvas>
+  </div>
 </div>
   <!-- Add this code wherever you want the area chart to appear -->
 <!-- <div class="chart-container">
@@ -74,19 +83,6 @@
   </canvas>
 </div>-->
 
-<div class="chart-container">
-  <canvas baseChart [datasets]="mainChart.data.datasets" [labels]="mainChart.data.labels"
-    [options]="mainChart.options" [legend]="mainChart.legend" [chartType]="mainChart.type">
-  </canvas>
-</div>
-<!-- Add a container for the legend and paragraph -->
-<div class="legend-paragraph-container">
-  <!-- Add the legend here -->  
 
-  <!-- Add the paragraph here   
-  <p class="graph-paragraph">
-    Ce graphique montre le nombre de performances des étudiants par mois
-  </p>
-</div>-->
 
 
