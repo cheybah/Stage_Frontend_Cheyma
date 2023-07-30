@@ -10,11 +10,11 @@ body, html {
 .dashboard-container {
   /* Set the container to cover the whole screen */
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   min-height: 100%; /* Ensure the container takes at least the full viewport height */
-
-  /* Center the content horizontally */
-  justify-content: center;
+  justify-content: space-between;
+  padding-left: 10px;
+  padding-right: 10px;
   align-items: center;
   position: relative; /* Set the position to relative for child element positioning */
 }
@@ -35,6 +35,7 @@ body, html {
   position: absolute;
   top: 75px; /* Adjust the top position as needed */
   right: 10px; /* Adjust the right position as needed */
+
 }
 
 .date-picker {
@@ -70,3 +71,65 @@ body, html {
   position: sticky;
   bottom: 0;
 }
+
+/* dashboard.component.css */
+
+/* Styling for the stat cards */
+.stat-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Styling for the stat card title */
+.stat-card h2 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Styling for the stat items inside the card */
+.stat-data {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Styling for each stat item */
+.stat-item {
+  text-align: center;
+}
+
+/* Styling for the stat value */
+.stat-value {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Styling for the stat label (e.g., Active, Inactive) */
+.stat-label {
+  font-size: 14px;
+  color: #808080;
+}
+
+/* Styling for the list of students per year and per bus */
+.stat-data ul {
+  list-style: none;
+  padding: 0;
+}
+
+/* Styling for each item in the list */
+.stat-data li {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.cards-container {
+  display: flex;
+  gap: 20px; /* Add some space between the cards */
+  flex-wrap: wrap; /* Allow the cards to wrap to the next line if the container is narrow */
+}
+
+

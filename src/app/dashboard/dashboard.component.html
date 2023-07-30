@@ -1,13 +1,67 @@
 <!-- dashboard.component.html -->
 
 <div class="dashboard-container">
-    <!-- Add the image as a background -->
-    <img src="/assets/img/ecole-les-nouvelles-generations-slider-1-min.jpg" class="background-image" />
-    <div class="date">
-      <input type="date" [(ngModel)]="currentDate" class="date-picker"> <!-- Use ngModel to bind the currentDate -->
-     </div>
-
-  
-      <!-- Add more chart sections as needed -->
+  <!-- Add the image as a background -->
+  <img src="/assets/img/ecole-les-nouvelles-generations-slider-1-min.jpg" class="background-image" />
+  <div class="date">
+    <input type="date" [(ngModel)]="currentDate" class="date-picker"> <!-- Use ngModel to bind the currentDate -->
   </div>
-  
+
+  <div class="stat-card">
+    <h2>Total d'élèves</h2>
+    <div class="stat-data">
+      <div class="stat-item">
+        <span class="stat-value">{{ totalStudents }}</span>
+        <span class="stat-label"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="stat-card">
+    <h2>Total de personnels</h2>
+    <div class="stat-data">
+      <div class="stat-item">
+        <span class="stat-value">{{ totalPersonnel }}</span>
+        <span class="stat-label"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="stat-card">
+    <h2>Nombre de Bus</h2>
+    <div class="stat-data">
+      <div class="stat-item">
+        <span class="stat-value">{{ totalBuses }}</span>
+        <span class="stat-label"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Total Number of Seats Card -->
+  <div class="stat-card" (click)="toggleSeatsPanel()"> <!-- Add click event to toggleSeatsPanel() -->
+    <h2>Total de places</h2>
+    <div class="stat-data">
+      <div class="stat-item">
+        <span class="stat-value">{{ getTotalSeats() }}</span>
+        <span class="stat-label"></span>
+      </div>
+      <!-- Add arrow icon based on the showSeatsPanel value -->
+      <mat-icon class="expand-icon">
+        {{ showSeatsPanel ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
+      </mat-icon>
+    </div>
+  </div>
+
+  <!-- Seats Per Bus Cards (Hidden by default) -->
+  <div *ngIf="showSeatsPanel">
+    <div *ngFor="let bus of seatsPerBus" class="stat-card">
+      <h2>Bus {{ bus.busNumber }} Places</h2>
+      <div class="stat-data">
+        <div class="stat-item">
+          <span class="stat-value">{{ bus.seatCount }}</span>
+          <span class="stat-label"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

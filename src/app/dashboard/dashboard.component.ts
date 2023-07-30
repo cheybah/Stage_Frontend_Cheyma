@@ -1,7 +1,13 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import * as Chartist from 'chartist';
-import { ClasseService } from 'app/services/classe.service';
+import { Bus } from 'app/models/bus';
+import { BusService } from 'app/services/bus.service';
 import { DatePipe } from '@angular/common';
+import { ClasseService } from 'app/services/classe.service';
+import {EleveModel} from 'app/models/eleveModel';
+import {PersonnelModel} from 'app/models/personnelModel';
+import { EleveService } from 'app/services/eleve.service';
+import { PersonnelService } from 'app/services/personnel.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,33 +16,96 @@ import { DatePipe } from '@angular/common';
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
 
-  totalClasses: number = 0;
-  currentDate: string; // To store the total number of classes
-  // Add more variables here for other statistics you want to display
+  currentDate: string;
 
-  constructor(private classeService: ClasseService,
-    private datePipe: DatePipe) { this.currentDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd'); }
+  totalStudents: number = 0;
+  totalPersonnel: number = 0;
+  totalBuses: number = 0;
+  totalSeats: number = 0;
+  showSeatsPanel: boolean = false;
+  seatsPerBus: { busNumber: number; seatCount: number; }[] = [];
 
-  ngOnInit() {
-    this.fetchClassData();
+  constructor(private busService: BusService,
+    private eleveService: EleveService,
+    private personnelService: PersonnelService,
+     private datePipe: DatePipe) {
+    this.currentDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
   }
+
+  ngOnInit(): void {
+    this.getTotalBuses();
+    this.getSeatsPerBus();
+    this.getTotalStudents();
+    this.getTotalPersonnel();
+  }
+
+  getTotalBuses(): void {
+    this.busService.getAllBusEtatActif().subscribe(
+      (buses: Bus[]) => {
+        this.totalBuses = buses.length;
+      },
+      (error: any) => {
+        console.error(error);
+      }
+    );
+  }
+
+  getTotalSeats(): number {
+    return this.seatsPerBus.reduce((total, bus) => total + bus.seatCount, 0);
+  }
+
+  getSeatsPerBus(): void {
+    this.busService.getAllBusEtatActif().subscribe(
+      (buses: Bus[]) => {
+        let totalSeatsCount = 0;
+        const seatsPerBusMap = new Map<number, number>();
+        buses.forEach((bus) => {
+          const seatCount = bus.nombrePlaces;
+          totalSeatsCount += seatCount;
+          seatsPerBusMap.set(bus.id, seatCount);
+        });
+
+        this.totalSeats = totalSeatsCount;
+        this.seatsPerBus = Array.from(seatsPerBusMap.entries()).map(([busNumber, seatCount]) => ({
+          busNumber,
+          seatCount,
+        }));
+      },
+      (error: any) => {
+        console.error(error);
+      }
+    );
+  }
+
+  toggleSeatsPanel(): void {
+    this.showSeatsPanel = !this.showSeatsPanel;
+  }
+
+  getTotalStudents(): void {
+    this.eleveService.getAllEleves().subscribe(
+      (eleves: EleveModel[]) => {
+        this.totalStudents = eleves.length;
+      },
+      (error: any) => {
+        console.error(error);
+      }
+    );
+  }
+
+  getTotalPersonnel(): void {
+    this.personnelService.getAllPersonnels().subscribe(
+      (personnel: PersonnelModel[]) => {
+        this.totalPersonnel = personnel.length;
+      },
+      (error: any) => {
+        console.error(error);
+      }
+    );
+  }
+
 
   ngAfterViewInit() {
     this.initCharts();
-  }
-
-  fetchClassData() {
-    // Assuming you have a service method to fetch data for classes
-    this.classeService.getAllClasses().subscribe(
-      (classes) => {
-        this.totalClasses = classes.length;
-        // You can fetch other statistics related to classes here
-      },
-      (error) => {
-        console.error(error);
-        // Handle error here
-      }
-    );
   }
 
   initCharts() {
