@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import * as Chartist from 'chartist';
 import { ClasseService } from 'app/services/classe.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,10 +10,12 @@ import { ClasseService } from 'app/services/classe.service';
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
 
-  totalClasses: number = 0; // To store the total number of classes
+  totalClasses: number = 0;
+  currentDate: string; // To store the total number of classes
   // Add more variables here for other statistics you want to display
 
-  constructor(private classeService: ClasseService) { }
+  constructor(private classeService: ClasseService,
+    private datePipe: DatePipe) { this.currentDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd'); }
 
   ngOnInit() {
     this.fetchClassData();

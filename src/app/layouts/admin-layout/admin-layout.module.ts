@@ -16,6 +16,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
+import { DatePipe } from '@angular/common'; // Import DatePipe
+
 
 
 
@@ -82,5 +84,7 @@ import { AnneeScolaireComponent, DialogAnneeScolaire, EditDialogAnneeScolaire } 
     EditDialogAnneeScolaire,
 
   ],
+
+  providers: [DatePipe], // Add DatePipe to the providers array
 })
 export class AdminLayoutModule {}
