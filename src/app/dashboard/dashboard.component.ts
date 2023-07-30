@@ -1,13 +1,15 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import * as Chartist from 'chartist';
+import { ChartOptions, ChartType, ChartDataSets, ChartScales, LinearScale, TimeScale } from 'chart.js';
+import { Label } from 'ng2-charts';
 import { Bus } from 'app/models/bus';
 import { BusService } from 'app/services/bus.service';
 import { DatePipe } from '@angular/common';
-import { ClasseService } from 'app/services/classe.service';
 import {EleveModel} from 'app/models/eleveModel';
 import {PersonnelModel} from 'app/models/personnelModel';
 import { EleveService } from 'app/services/eleve.service';
 import { PersonnelService } from 'app/services/personnel.service';
+import { DashboardChartsData, IChartProps } from 'app/dashboard/dashboard-charts-data';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -15,6 +17,14 @@ import { PersonnelService } from 'app/services/personnel.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
+
+  public mainChart: IChartProps = {};
+
+  activeEleveData: number[] = [];
+  totalEleveData: number[] = [];
+  chartLabels: Label[] = [];
+
+  
 
   currentDate: string;
 
@@ -28,15 +38,20 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   constructor(private busService: BusService,
     private eleveService: EleveService,
     private personnelService: PersonnelService,
-     private datePipe: DatePipe) {
+    private chartsData: DashboardChartsData,
+    private datePipe: DatePipe) {
     this.currentDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
   }
 
+
+
   ngOnInit(): void {
+    this.getEleveData();
     this.getTotalBuses();
     this.getSeatsPerBus();
     this.getTotalStudents();
     this.getTotalPersonnel();
+    this.mainChart = this.chartsData.mainChart;
   }
 
   getTotalBuses(): void {
@@ -103,6 +118,61 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     );
   }
 
+  chartData: ChartDataSets[] = [
+    { data: this.activeEleveData, label: 'Active Eleves' },
+    { data: this.totalEleveData, label: 'Total Eleves' },
+  ];
+
+  chartOptions: ChartOptions = {
+    responsive: true,
+    scales: {
+      xAxes: [{   // Use xAxes instead of xAxis
+        type: 'category',
+        
+      }],
+      yAxes: [{   // Use yAxes instead of yAxis
+        ticks: {
+          beginAtZero: true,
+        },
+      }],
+    },
+  };
+
+  chartLegend = true;
+  chartType: ChartType = 'line';
+
+  // ...
+
+  getEleveData(): void {
+    this.eleveService.getAllEleves().subscribe(
+      (eleves: any[]) => {
+        this.totalEleveData = eleves.map((eleve) => eleve.length);
+  
+        this.eleveService.getAllEleveEtatActif().subscribe(
+          (activeEleves: any[]) => {
+            this.activeEleveData = activeEleves.map((eleve) => eleve.length);
+  
+            // Update chart data and labels after fetching the data
+            this.chartData = [
+              { data: this.activeEleveData, label: 'Active Eleves' },
+              { data: this.totalEleveData, label: 'Total Eleves' },
+            ];
+  
+            // Assuming you want the chart labels to be the same for all data points
+            this.chartLabels = eleves.map((eleve) => eleve.label);
+  
+          },
+          (error: any) => {
+            console.error(error);
+          }
+        );
+      },
+      (error: any) => {
+        console.error(error);
+      }
+    );
+  }
+  
 
   ngAfterViewInit() {
     this.initCharts();

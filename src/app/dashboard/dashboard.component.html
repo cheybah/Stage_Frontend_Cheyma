@@ -1,5 +1,3 @@
-<!-- dashboard.component.html -->
-
 <div class="dashboard-container">
   <!-- Add the image as a background -->
   <img src="/assets/img/ecole-les-nouvelles-generations-slider-1-min.jpg" class="background-image" />
@@ -65,3 +63,30 @@
     </div>
   </div>
 </div>
+  <!-- Add this code wherever you want the area chart to appear -->
+<!-- <div class="chart-container">
+  <canvas baseChart
+          [datasets]="[{ data: activeEleveData, label: 'Active Eleves' }, { data: totalEleveData, label: 'Total Eleves' }]"
+          [labels]="chartLabels"
+          [options]="chartOptions"
+          [legend]="chartLegend"
+          [chartType]="chartType">
+  </canvas>
+</div>-->
+
+<div class="chart-container">
+  <canvas baseChart [datasets]="mainChart.data.datasets" [labels]="mainChart.data.labels"
+    [options]="mainChart.options" [legend]="mainChart.legend" [chartType]="mainChart.type">
+  </canvas>
+</div>
+<!-- Add a container for the legend and paragraph -->
+<div class="legend-paragraph-container">
+  <!-- Add the legend here -->  
+
+  <!-- Add the paragraph here   
+  <p class="graph-paragraph">
+    Ce graphique montre le nombre de performances des étudiants par mois
+  </p>
+</div>-->
+
+

@@ -17,6 +17,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { ChartsModule } from 'ng2-charts'; // Import ChartsModule from ng2-charts
 import { DatePipe } from '@angular/common'; // Import DatePipe
 
 
@@ -49,6 +50,7 @@ import { AnneeScolaireComponent, DialogAnneeScolaire, EditDialogAnneeScolaire } 
     MatInputModule,
     MatSelectModule,
     MatTooltipModule,
+    ChartsModule,
     MatDialogModule,
     MatIconModule,
   ],
@@ -56,6 +58,7 @@ import { AnneeScolaireComponent, DialogAnneeScolaire, EditDialogAnneeScolaire } 
     DashboardComponent,
     UserProfileComponent,
     TableListComponent,
+
     IconsComponent,
     MapsComponent,
     NotificationsComponent,

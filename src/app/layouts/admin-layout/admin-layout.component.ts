@@ -3,7 +3,8 @@ import { Location, LocationStrategy, PathLocationStrategy, PopStateEvent } from 
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import PerfectScrollbar from 'perfect-scrollbar';
 import * as $ from "jquery";
-import { filter, Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-admin-layout',

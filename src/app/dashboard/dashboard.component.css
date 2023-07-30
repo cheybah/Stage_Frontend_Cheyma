@@ -132,4 +132,50 @@ body, html {
   flex-wrap: wrap; /* Allow the cards to wrap to the next line if the container is narrow */
 }
 
+/* dashboard.component.css */
 
+/* ... (existing code) ... */
+
+/* Add styles for the legend and paragraph container */
+.legend-paragraph-container {
+  margin-top: 20px;
+}
+
+/* Style for the legend list */
+.legend-list {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* Style for legend items (with colored squares) */
+.legend-list li {
+  display: flex;
+  align-items: center;
+}
+
+/* Add colored squares for legend items */
+.legend-color {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.active-eleves-color {
+  background-color: #007bff; /* Replace with the color for active eleves */
+}
+
+.total-eleves-color {
+  background-color: #28a745; /* Replace with the color for total eleves */
+}
+
+/* Style for the paragraph */
+.graph-paragraph {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #333; /* Replace with the desired text color */
+}
